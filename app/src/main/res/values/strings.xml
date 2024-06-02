@@ -3,4 +3,10 @@
     <string name="student_name">Student Name</string>
     <string name="_88_01919229934">+88 01919229934</string>
     <string name="todo">TODO</string>
+    <string name="enter_student_name">Enter Student Name</string>
+    <string name="enter_student_phone_number">Enter Student Phone Number</string>
+    <string name="add_student_details">Add Student Details</string>
+    <string name="select_apoinment_date">Select Apoinment Date</string>
+    <string name="save">Save</string>
+    <string name="select_apoinment_time">Select Apoinment Time</string>
 </resources>
