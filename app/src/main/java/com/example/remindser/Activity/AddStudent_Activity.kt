@@ -2,11 +2,16 @@ package com.example.remindser.Activity
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
+import com.example.remindser.Entity.StudentTable
 import com.example.remindser.R
+import com.example.remindser.viewModel.StudentViewModel
+import com.example.remindser.viewModel.ViewModelFactory
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import java.util.Calendar
@@ -24,6 +29,10 @@ class AddStudent_Activity : AppCompatActivity() {
 
     private var appointmentDate: String = ""
     private var appointmentTime: String = ""
+
+    private val viewModel: StudentViewModel by viewModels{
+        ViewModelFactory(application)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_student)
@@ -40,6 +49,7 @@ class AddStudent_Activity : AppCompatActivity() {
 
         fab_date.setOnClickListener { showDatePicker() }
         fab_time.setOnClickListener { showTimePicker() }
+        save_btn.setOnClickListener { saveStudent() }
 
     }
 
@@ -74,5 +84,17 @@ class AddStudent_Activity : AppCompatActivity() {
             year, month, day
         )
         datePickerDialog.show()
+    }
+
+    private fun saveStudent() {
+        val name = student_name.text.toString().trim()
+        val number = student_number.text.toString().trim()
+        val details = student_details.text.toString().trim()
+
+        if (name.isNotEmpty() && number.isNotEmpty() && details.isNotEmpty() && appointmentDate.isNotEmpty() && appointmentTime.isNotEmpty()) {
+            val student = StudentTable(studentName = name, studentNumber = number, studentDescription = details, date = appointmentDate, time = appointmentTime)
+            viewModel.insertStudent(student)
+            startActivity(Intent(this, MainActivity::class.java)) // Go back to the previous activity
+        }
     }
 }

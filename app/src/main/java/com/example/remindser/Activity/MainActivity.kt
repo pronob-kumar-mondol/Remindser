@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         fab=findViewById(R.id.fab_main)
         recyclerView=findViewById(R.id.recyclerView)
 
-        studentAdapter=StudentAdapter(viewModel.allStudents){student->
+        studentAdapter=StudentAdapter{student->
             viewModel.deleteStudent(student)
         }
         recyclerView.adapter = studentAdapter
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.allStudents.observe(this, Observer {student->
             student?.let {
-                studentAdapter.notifyDataSetChanged()
+                studentAdapter.setStudents(it)
             }
         })
 
@@ -49,8 +49,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AddStudent_Activity::class.java))
             finish()
         }
-
-
 
     }
 }

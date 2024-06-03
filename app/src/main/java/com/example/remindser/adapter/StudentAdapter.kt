@@ -5,6 +5,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -15,8 +16,9 @@ import java.util.Date
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-class StudentAdapter(private val studentList: LiveData<List<StudentTable>>,private val onDeleteClick: (StudentTable) -> Unit):RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
+class StudentAdapter(private val onDeleteClick: (StudentTable) -> Unit):RecyclerView.Adapter<StudentAdapter.StudentViewHolder>() {
 
+    private var studentList = listOf<StudentTable>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -28,7 +30,7 @@ class StudentAdapter(private val studentList: LiveData<List<StudentTable>>,priva
 
     override fun onBindViewHolder(holder: StudentAdapter.StudentViewHolder, position: Int) {
 
-        val currentStudent=studentList.value?.get(position)
+        val currentStudent=studentList[position]
         holder.student_name.text=currentStudent?.studentName
         holder.student_number.text=currentStudent?.studentNumber
 
@@ -54,15 +56,15 @@ class StudentAdapter(private val studentList: LiveData<List<StudentTable>>,priva
 
 
     override fun getItemCount(): Int {
-        return studentList.value?.size ?: 0
+        return studentList.size
     }
 
     class StudentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val student_name: TextView= itemView.findViewById(R.id.student_name)
         val student_number: TextView=itemView.findViewById(R.id.student_number)
         val remaining_time: TextView= itemView.findViewById(R.id.student_remaining_time)
-        val call_dirrectly: TextView= itemView.findViewById(R.id.call_dirrectly)
-        val delete: TextView= itemView.findViewById(R.id.delete)
+        val call_dirrectly: ImageView= itemView.findViewById(R.id.call_dirrectly)
+        val delete: ImageView= itemView.findViewById(R.id.delete)
     }
 
     private fun calculateRemainingTime(date: String?, time: String?): CharSequence? {
@@ -86,5 +88,11 @@ class StudentAdapter(private val studentList: LiveData<List<StudentTable>>,priva
         } catch (e: Exception) {
             "Invalid date/time"
         }
+    }
+
+    // Update the data in the adapter
+    fun setStudents(students: List<StudentTable>) {
+        studentList = students
+        notifyDataSetChanged()
     }
 }

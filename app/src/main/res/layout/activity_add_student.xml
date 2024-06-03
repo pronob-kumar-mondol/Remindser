@@ -59,7 +59,7 @@
             android:background="@drawable/background_et"
             android:elevation="20dp"
             android:fontFamily="@font/acme"
-            android:inputType="text" />
+            android:inputType="phone" />
 
 
     </com.google.android.material.textfield.TextInputLayout>

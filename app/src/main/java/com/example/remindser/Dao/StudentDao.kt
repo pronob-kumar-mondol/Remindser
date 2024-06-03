@@ -15,6 +15,9 @@ interface StudentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertStudent(student: StudentTable)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(students: List<StudentTable>)
+
     @Update
     suspend fun update(student: StudentTable)
 
@@ -23,6 +26,9 @@ interface StudentDao {
 
     @Query("SELECT * FROM student_table ORDER BY id ASC")
     fun getAllStudents(): LiveData<List<StudentTable>>
+
+    @Query("SELECT * FROM student_table")
+    suspend fun getAllStudentsDirect(): List<StudentTable>
 
     @Query("DELETE FROM student_table WHERE id = :id")
     suspend fun deleteById(id: Int)

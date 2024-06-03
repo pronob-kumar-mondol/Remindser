@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:elevation="10dp"
@@ -28,11 +29,10 @@
             android:id="@+id/student_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/acme"
             android:text="@string/_88_01919229934"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/student_name"
             app:layout_constraintStart_toStartOf="@+id/student_name"
             app:layout_constraintTop_toBottomOf="@+id/student_name" />
 
@@ -40,12 +40,14 @@
             android:id="@+id/student_remaining_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/acme"
             android:text="Remaining Time"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="@+id/student_name"
-            app:layout_constraintStart_toStartOf="@+id/student_name"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/delete"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/student_number" />
 
         <ImageView
