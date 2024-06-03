@@ -1,9 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("kotlin-kapt")
     alias(libs.plugins.google.gms.google.services)
     id("com.google.devtools.ksp")
+
 }
 
 android {
@@ -53,8 +53,9 @@ dependencies {
 
 
     implementation(libs.androidx.room.runtime)
-    ksp(libs.androidx.room.compiler.v250)
-
+    val room_version = "2.6.1"
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation ("androidx.room:room-ktx:$room_version")
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.livedata.ktx)
